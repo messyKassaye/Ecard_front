@@ -1,9 +1,9 @@
 import React from 'react'
-import {fetchFaultTypes} from '../state/actions/FaultTypeAction'
-import {connect} from 'react-redux'
 import { Container, Grid } from '@material-ui/core'
-import NewCardRequestAndBuyCards from '../../commons/NewCardRequestAndBuyCards'
 import Pricings from '../../commons/widgets/Pricings'
+import NewAgentAndRetailers from '../../commons/widgets/NewAgentAndRetailers'
+import NewPartners from './NewPartners'
+import Companies from './Companies'
 class AdminHome extends React.Component{
 
     componentDidMount = ()=>{
@@ -17,11 +17,21 @@ class AdminHome extends React.Component{
                 <Grid container spacing={2}>
 
                     <Grid item md={8} xs={12} sm={12}>
-                        <NewCardRequestAndBuyCards/>
+                        <Grid container spacing={2}>
+
+                            <Grid item md={12} xs={12} sm={12}>
+                                <NewPartners/>
+                            </Grid>
+
+                            <Grid item md={12} xs={12} sm={12}>
+                                <Companies/>
+                            </Grid>
+
+                        </Grid>
                     </Grid>
 
                     <Grid item md={4} xs={12} sm={12}>
-                        <Pricings/>
+                        <NewAgentAndRetailers/>
                     </Grid>
                 </Grid>
             </Container>
@@ -29,8 +39,4 @@ class AdminHome extends React.Component{
     }
 }
 
-const mapStateToProps = state=>({
-    faultTypes:state.authReducer.adminReducer.faultTypeReducers.faultTypes,
-    loading:state.authReducer.adminReducer.faultTypeReducers.loading
-})
-export default connect(mapStateToProps,{fetchFaultTypes})(AdminHome)
+export default AdminHome

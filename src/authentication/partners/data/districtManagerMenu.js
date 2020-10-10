@@ -11,7 +11,7 @@ import PlaceIcon from '@material-ui/icons/Place';
 import WarningIcon from '@material-ui/icons/Warning';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import React from "react";
-import { LocalMall, SimCard } from '@material-ui/icons'
+import { BusinessCenter, LocalMall, SimCard } from '@material-ui/icons'
 import PersonIcon from '@material-ui/icons/Person'
 const districtManagerMenu = [
     {
@@ -45,6 +45,11 @@ const districtManagerMenu = [
         name:'Packages',
         route:'/auth/partners/packages',
         icon:<LocalMall/>
+    },
+    {
+        name:'finances',
+        route:'/auth/partners/finances',
+        icon:<BusinessCenter/>
     },
     {
         name:'Settings',

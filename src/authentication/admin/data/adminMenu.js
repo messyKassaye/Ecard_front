@@ -5,7 +5,8 @@ import PlaceIcon from '@material-ui/icons/Place';
 import WarningIcon from '@material-ui/icons/Warning';
 import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import React from "react";
-import { AttachMoney, LocalMall, Person, PersonAdd } from '@material-ui/icons';
+import { AttachMoney, BusinessCenter, LocalMall, Person, PersonAdd, VerifiedUser } from '@material-ui/icons';
+import BugReportIcon from '@material-ui/icons/BugReport';
 const adminMenu = [
     {
         name:'Dashboard',
@@ -13,33 +14,28 @@ const adminMenu = [
         icon:<DashboardIcon/>
     },
     {
-        name:'Cards',
-        route:'/auth/admin/cards',
-        icon:<SimcardIcon/>
-    },
-    {
         name:'Customers',
         route:'/auth/admin/customers',
         icon:<PersonAdd/>
     },
     {
-      name:'Sell and buy',
-      route:'/auth/admin/sell_buy',
-      icon:<AttachMoney/>
-    },
+      name:'Companies',
+      route:'/auth/admin/companies',
+      icon:<BusinessCenter/>
+  },
 
     {
-        name:'Packages',
-        route:'/auth/admin/packages',
-        icon:<LocalMall/>
-      },
+      name:'Verfied customers',
+      route:'/auth/admin/verified_customers',
+      icon:<VerifiedUser/>
+  },
 
     {
-        name:'Sellers',
-        route:'/auth/admin/sellers',
-        icon:<Person/>
-      },
-
+      name:'Spam reports',
+      route:'/auth/admin/spams',
+      icon:<BugReportIcon/>
+  },
+    
     {
         name:'Settings',
         route:'/auth/admin/settings',

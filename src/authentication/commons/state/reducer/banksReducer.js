@@ -1,20 +1,21 @@
-import React from 'react'
-import {FETCH_REGION_WOREDA} from '../actionConstants/adminConstants'
+import {FETCH_BANKS} from '../commonConstants'
+
 const initialState = {
+    banks:[],
     loading:true,
-    regionWoredaCities:[]
 }
 
 export default function(state=initialState,action){
     switch(action.type){
-        case FETCH_REGION_WOREDA:
+        case FETCH_BANKS:
             return {
                 ...state,
-                loading:false,
-                regionWoredaCities:action.payload
+                banks:action.payload,
+                loading:false
             }
 
             default:
                 return state
     }
+
 }

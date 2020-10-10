@@ -16,7 +16,6 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import {showMainDialog} from "../../authentication/admin/state/actions/dialogAction";
 import {green} from "@material-ui/core/colors";
-import {storeManager,storeTechnician} from '../admin/state/actions/managersAction'
 
 class AddNewUser extends Component {
     constructor(props) {
@@ -189,8 +188,6 @@ class AddNewUser extends Component {
     }
 }
 
-const mapSteteToProps = state=>({
-    response:state.authReducer.adminReducer.managerReducers.response
-})
 
-export default connect(mapSteteToProps,{showMainDialog,storeManager,storeTechnician})(withStyles(signup)(AddNewUser));
+
+export default withStyles(signup)(AddNewUser);

@@ -70,8 +70,14 @@ class FinanceWidget extends React.Component{
                                             <div style={{display:'flex',flexDirection:'row',justifyContent:'space-around'}}>
                                                 <Typography variant={'h5'} style={{color:'white',marginRight:10}}>
                                                 {
-                                                    `${this.props.finance.finance[0].total_balance}`
-                                                 }
+                                                    this.props.finance.finance.length<=0
+                                                    ?
+                                                        (<span>0</span>)
+                                                    :
+                                                        (
+                                                            <span>{this.props.finance.finance[0].total_balance}</span>
+                                                        )
+                                                }
                                                 </Typography>
                                                 <Typography variant={'h5'} style={{color:orange[500]}}>
                                                     ETB
@@ -107,7 +113,15 @@ class FinanceWidget extends React.Component{
                                                 >
                                         <ListItem button style={{width:'100%'}}>
                                             <ListItemText primary={
-                                                `Sell balance: ${this.props.finance.finance[0].total_balance} ETB`
+                                                this.props.finance.finance.length<=0
+                                                ?
+                                                    (<span>Sell balance: 0 ETB</span>)
+                                                :
+                                                    (
+                                                        <span>
+                                                            {`Sell balance: ${this.props.finance.finance[0].total_balance} ETB`}
+                                                        </span>
+                                                    )
                                             }/>
                                         </ListItem>
 

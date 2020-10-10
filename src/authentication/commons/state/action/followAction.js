@@ -2,7 +2,7 @@ import {FETCH_FOLLOW_REQUEST,SHOW_ACCEPTED_FOllOW,UPDATE_FOLLOW} from '../common
 import axios from 'axios'
 import { API_URL } from '../../../../constants/constants'
 
-const PATH = 'follow'
+const PATH = 'connect'
 
 export const showFollows = (status)=>dispatch=>{
     axios.get(`${API_URL}${PATH}/${status}`)

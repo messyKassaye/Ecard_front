@@ -1,38 +1,33 @@
-import {FETCH_CARDS, STORE_CARDS,SHOW_CARDS} from '../PartnersConstants'
+import {STORE_BANK_ACCOUNT,FETCH_BANK_ACCOUNT, UPDATE_BANK_ACCOUNT} from '../commonConstants'
 
 const initialState = {
-    cards:[],
+    bankAccount:[],
     loading:true,
     response:{
         status:false,
         message:''
-    },
-    showResponse:{
-        status:false,
-        message:''
     }
+
 }
 
 export default function(state=initialState,action){
     switch(action.type){
-        case FETCH_CARDS:
-            return{
+        case FETCH_BANK_ACCOUNT:
+            return {
                 ...state,
-                cards:action.payload,
+                bankAccount:action.payload,
                 loading:false
             }
-            case STORE_CARDS:
+            case STORE_BANK_ACCOUNT:
                 return {
                     ...state,
                     response:action.payload
                 }
-
-            case SHOW_CARDS:
+                case UPDATE_BANK_ACCOUNT:
                     return {
                         ...state,
                         response:action.payload
                     }
-
             default:
                 return state
     }

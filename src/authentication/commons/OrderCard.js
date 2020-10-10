@@ -166,7 +166,7 @@ class OrderCard extends React.Component{
         const setLoading = !finished && loading;
         const isEnabled = true
 
-        return <div style={{display:'flex',flexDirection:'column',paddingLeft:25,paddingRight:25}}>
+        return <div style={{display:'flex',flexDirection:'column'}}>
                     {
                         this.props.loading
                         ?
@@ -178,7 +178,9 @@ class OrderCard extends React.Component{
                                         this.props.user.relations.role[0].id===2
                                         ?
                                             (
-                                               <PartnersOrderCard/>
+                                              <div>
+                                                   <PartnersOrderCard/>
+                                              </div>
                                             )
                                         :
                                             (
