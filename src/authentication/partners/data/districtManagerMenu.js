@@ -26,7 +26,7 @@ const districtManagerMenu = [
         icon:<SimCard/>
     },
     {
-        name:'Customers',
+        name:'Agent and retailer',
         route:'/auth/partners/agent_retailer',
         icon:<GroupWorkIcon/>
     },
@@ -34,22 +34,6 @@ const districtManagerMenu = [
         name:'Sell and buy',
         route:'/auth/partners/sell_buy',
         icon:<AttachMoneyIcon/>
-    },
-    {
-        name:'Sellers',
-        route:'/auth/partners/sellers',
-        icon:<PersonIcon/>
-    },
-
-    {
-        name:'Packages',
-        route:'/auth/partners/packages',
-        icon:<LocalMall/>
-    },
-    {
-        name:'finances',
-        route:'/auth/partners/finances',
-        icon:<BusinessCenter/>
     },
     {
         name:'Settings',

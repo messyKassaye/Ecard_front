@@ -9,7 +9,7 @@ import {showMainDialog} from '../../admin/state/actions/dialogAction'
 import CardPriceSetter from '../dialogs/CardPriceSetter'
 import { red } from '@material-ui/core/colors'
 import ApprovingCardRequestDialog from '../dialogs/ApprovingCardRequestDialog'
-
+import {indexCardPrice} from '../state/action/cardPriceAction'
 class NewCardRequests extends React.Component{
     constructor(props) {
         super(props);
@@ -32,6 +32,7 @@ class NewCardRequests extends React.Component{
 
     componentDidMount(){
         this.props.showCardRequest('on_progress')
+        this.props.indexCardPrice();
     }
 
     setPrice = ()=>{
@@ -88,7 +89,7 @@ class NewCardRequests extends React.Component{
             <Divider/>
             <CardContent>
                 {
-                    this.props.loading
+                    this.props.loading&&this.props.cardPriceLoading
                     ?
                         (<UserLoading/>)
                     :
@@ -117,7 +118,7 @@ class NewCardRequests extends React.Component{
                                                     </Typography>
 
                                                     {
-                                                            requests.price.length<=0
+                                                            this.props.cardPrice.length<=0
                                                             ?
                                                                  (
                                                                      <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-start'}}>
@@ -140,9 +141,14 @@ class NewCardRequests extends React.Component{
                                                                    )
                                                             :
                                                                 (
-                                                                    <Typography>
-                                                                        {`Total payment: ${calculateCardPayment(requests.card_type.value,requests.amount,requests.price[0].percentage).toLocaleString()} ETB`}
-                                                                     </Typography>
+                                                                    <div style={{display:'flex',flexDirection:'column'}}>
+                                                                        <Typography>
+                                                                        {`Unit price: ${requests.card_type.value*this.props.cardPrice[0].percentage} ETB`}
+                                                                         </Typography>
+                                                                        <Typography>
+                                                                        {`Total payment: ${calculateCardPayment(requests.card_type.value,requests.amount,this.props.cardPrice[0].percentage).toLocaleString()} ETB`}
+                                                                         </Typography>
+                                                                    </div>
                                                                 )
                                                         }
                                 
@@ -182,7 +188,6 @@ class NewCardRequests extends React.Component{
                                                     <Button
                                                     onClick={()=>this.send(requests)}
                                                     variant={'contained'}
-                                                    disabled={requests.payment===null?true:false}
                                                     color={'primary'}
                                                     size={'medium'}
                                                     style={{textTransform:'none'}}
@@ -236,7 +241,10 @@ class NewCardRequests extends React.Component{
 const mapSateToProps = state=>({
     card_request:state.authReducer.commonReducer.cardRequestReducer.card_request,
     loading:state.authReducer.commonReducer.cardRequestReducer.loading,
-    updateResponse:state.authReducer.commonReducer.cardRequestReducer.updateResponse
+    updateResponse:state.authReducer.commonReducer.cardRequestReducer.updateResponse,
+    cardPrice:state.authReducer.commonReducer.cardPriceReducer.cardPrice,
+    cardPriceLoading:state.authReducer.commonReducer.cardPriceReducer.loading
 })
 
-export default connect(mapSateToProps,{showCardRequest,updateCardRequest,showMainDialog})(NewCardRequests)
+export default connect(mapSateToProps,{indexCardPrice,showCardRequest,updateCardRequest,showMainDialog})
+(NewCardRequests)

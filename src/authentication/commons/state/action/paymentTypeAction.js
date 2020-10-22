@@ -1,14 +1,13 @@
-import React from 'react'
+import {FETCH_PAYMENT_TYPES} from '../commonConstants'
 import axios from 'axios'
 import { API_URL } from '../../../../constants/constants'
-import {FETCH_BANKS} from '../commonConstants'
-const PATH = 'banks'
+const PATH = 'payment_types'
 
-export const indexBanks = ()=>dispatch=>{
+export const indexPaymentTypes = ()=>dispatch=>{
     axios.get(`${API_URL}${PATH}`)
     .then(response=>response.data)
     .then(res=>dispatch({
-        type:FETCH_BANKS,
-        payload:res.data
+        type:FETCH_PAYMENT_TYPES,
+        payload:res
     }))
 }

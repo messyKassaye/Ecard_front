@@ -3,6 +3,7 @@ import { Person } from '@material-ui/icons'
 import React from 'react'
 import {connect} from 'react-redux'
 import {showAcceptedFollows,updateFollows} from '../../commons/state/action/followAction'
+import VerificationCard from '../../partners/component/widgets/VerificationCard'
 import CardLoading from '../loading/cardLoading'
 class AcceptedAgentAndRetailers extends React.Component{
     constructor(props) {
@@ -18,7 +19,7 @@ class AcceptedAgentAndRetailers extends React.Component{
     }
     
     componentDidMount(){
-        this.props.showAcceptedFollows('accepted')
+        this.props.showAcceptedFollows(1)
     }
 
     updateFollow = (id,status)=>{
@@ -74,47 +75,7 @@ class AcceptedAgentAndRetailers extends React.Component{
                                             this.props.follows
                                             .map(follow=>(
                                                 <Grid key={follow.id} item md={4} xs={12} sm={12}>
-                                                    <Card>
-                                                        <CardHeader
-                                                        action={
-                                                        <Button
-                                                            variant={'outlined'}
-                                                            color={'primary'}
-                                                            size={'small'}
-                                                            style={{textTransform:'none'}}>
-                                                                See profile
-                                                        </Button>}
-                                                        subheader={follow.user[0].role[0].name}
-                                                        avatar={
-                                                            follow.user[0].avator==='letter'
-                                                            ?
-                                                             <Avatar>{follow.user[0].first_name.charAt(0)}</Avatar>
-                                                            :
-                                                              <Avatar src={follow.user[0].avator}></Avatar>
-                                                        }
-                                                        title={`${follow.user[0].first_name} ${follow.user[0].last_name}`}/>
-                                                        <CardContent style={{padding:5,display:'flex',flexDirection:'column'}}>
-                                                            <Divider/>
-                                                           <div style={{marginTop:10,display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
-                                        
-                                                            <Button
-                                                            onClick={()=>this.updateFollow(follow.id,'canceled')}
-                                                            variant={'contained'}
-                                                            color={'secondary'}
-                                                            style={{textTransform:'none',marginRight:15}}>
-                                                                {
-                                                                    this.state.updating&&this.state.updatingId===follow.id
-                                                                    ?
-                                                                        (<span>Canceling...</span>)
-                                                                    :
-                                                                        (
-                                                                        <span>{this.state.update}</span>
-                                                                        )
-                                                                }
-                                                            </Button>
-                                                           </div>
-                                                        </CardContent>
-                                                    </Card>
+                                                    <VerificationCard follows={follow}/>
                                                 </Grid>
                                             ))
                                         }

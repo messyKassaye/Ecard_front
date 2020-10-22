@@ -195,6 +195,7 @@ class OrderCard extends React.Component{
 }
 const mapStateToProps = state=>({
     user: state.userData.user,
-    loading:state.userData.loading
+    loading:state.userData.loading,
+    response:state.authReducer.commonReducer.cardRequestReducer.response
 })
 export default  connect(mapStateToProps,{indexCardType,storeCardRequest,showMainDialog})(OrderCard);

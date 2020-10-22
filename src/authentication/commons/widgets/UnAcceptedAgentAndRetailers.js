@@ -44,7 +44,7 @@ class UnAcceptedAgentAndRetailers extends React.Component{
     }
     
     componentDidMount(){
-        this.props.showFollows('waiting')
+        this.props.showFollows(0)
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
@@ -126,7 +126,7 @@ class UnAcceptedAgentAndRetailers extends React.Component{
                                                             </Button>
 
                                                             <Button
-                                                            onClick={()=>this.updateFollow(follow.id,'accepted')}
+                                                            onClick={()=>this.updateFollow(follow.id,1)}
                                                             variant={'contained'}
                                                             color={'primary'}
                                                             style={{textTransform:'none',marginRight:15}}>

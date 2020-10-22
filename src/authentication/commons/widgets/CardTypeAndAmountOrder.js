@@ -5,6 +5,8 @@ import React from 'react'
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator'
 import { PARTNER_API_URL } from '../../../constants/constants';
 import LoadingButton from '../LoadingButton';
+import {showMainDialog} from '../../admin/state/actions/dialogAction'
+import {connect} from 'react-redux'
 class CardTypeAndAmountOrder extends React.Component{
     constructor(props) {
         super(props);
@@ -380,4 +382,4 @@ const mapStateToProps = state=>({
     cardType:state.authReducer.commonReducer.cardTypeReducer.cardType,
     loading:state.authReducer.commonReducer.cardTypeReducer.loading
 })
-export default CardTypeAndAmountOrder
+export default connect(mapStateToProps,{showMainDialog})(CardTypeAndAmountOrder)

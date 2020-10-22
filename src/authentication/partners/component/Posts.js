@@ -6,6 +6,7 @@ import Pricings from '../../commons/widgets/Pricings'
 import NewAgentAndRetailers from '../../commons/widgets/NewAgentAndRetailers'
 import Finances from '../../commons/widgets/Finances'
 import NearByPartnersAgentAndRetailers from '../../commons/NearByPartnersAgentAndRetailers'
+import MyAgentsRetailers from './MyAgentsRetailers'
 class Posts extends React.Component{
 
     render(){
@@ -16,6 +17,10 @@ class Posts extends React.Component{
 
                         <Grid item md={12} xs={12} sm={12}>
                          <NewCardRequestAndBuyCards/>
+                        </Grid>
+
+                        <Grid item md={12} xs={12} sm={12}>
+                            <MyAgentsRetailers/>
                         </Grid>
 
                         <Grid item md={12} xs={12} sm={12}>

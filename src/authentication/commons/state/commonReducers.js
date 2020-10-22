@@ -10,6 +10,8 @@ import approveCardRequestReducer from './reducer/approveCardRequestReducer'
 import bankAccountReducer from "./reducer/bankAccountReducer";
 import banksReducer from "./reducer/banksReducer";
 import nearByReducer from "./reducer/nearByReducer";
+import verificationReducer from "./reducer/verificationReducer";
+import paymentTypeReducer from "./reducer/paymentTypeReducer";
 export default combineReducers({
     regionReducer:RegionCityReducer,
     addressReducer:addressReducer,
@@ -21,5 +23,7 @@ export default combineReducers({
     cardRequestApproval:approveCardRequestReducer,
     bankAccountReducer:bankAccountReducer,
     banksReducer:banksReducer,
-    nearByReducer:nearByReducer
+    nearByReducer:nearByReducer,
+    verificationReducer:verificationReducer,
+    paymentTypesReducer:paymentTypeReducer
 })

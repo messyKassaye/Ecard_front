@@ -133,7 +133,7 @@ class Login extends React.Component {
                                         {
                                             'Login'
                                         }
-                                    </LoadingButton>
+                                </LoadingButton>
                             </ValidatorForm>
         )
     }

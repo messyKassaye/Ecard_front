@@ -1,9 +1,10 @@
-import { Avatar, Card, CardHeader, Divider, Grid, IconButton, Typography } from '@material-ui/core'
+import { Avatar, Button, Card, CardActions, CardHeader, Divider, Grid, IconButton, Typography } from '@material-ui/core'
 import React from 'react'
 import {indexNearBy} from '../commons/state/action/nearByAction'
 import {connect} from 'react-redux'
 import CardLoading from './loading/cardLoading'
 import { VerifiedUser } from '@material-ui/icons'
+import NearByCard from './widgets/NearByCard'
 class NearByPartnersAgentAndRetailers extends React.Component{
 
     componentDidMount(){
@@ -28,25 +29,7 @@ class NearByPartnersAgentAndRetailers extends React.Component{
                                     this.props.response.data
                                     .map(nearby=>(
                                         <Grid item md={12} xs={12} sm={12}>
-                                            <Card>
-                                            <CardHeader
-                                            avatar={<Avatar>{nearby.user[0].first_name.charAt(0)}</Avatar>}
-                                            subheader={
-                                                `${nearby.region_name} > ${nearby.city_name}`
-                                            }
-                                            action={
-                                               nearby.user[0].verification!==null
-                                               ?
-                                                    (
-                                                        <IconButton color={'primary'}>
-                                                             <VerifiedUser/>
-                                                        </IconButton>
-                                                    )
-                                               :
-                                                    (null)
-                                            }
-                                            title={`${nearby.user[0].first_name} ${nearby.user[0].last_name}`}/>
-                                        </Card>
+                                            <NearByCard nearby={nearby}/>
                                         </Grid>
                                     ))
                                 }

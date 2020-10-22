@@ -13,12 +13,10 @@ class Authenticated extends React.Component{
 
     render() {
         const roleId = JSON.parse(getRole()).id
-        if(roleId===2){
-            Component = React.lazy(()=> import("./partners/PartnersRoute"))
-        }else if(roleId===3){
-            Component = React.lazy(()=> import("./technician/TechniciansRoutes"))
-        }else  if(roleId===1){
+        if(roleId===1){
             Component = React.lazy(()=>import("./admin/AdminRoutes"))
+        }else  if(roleId===2){
+            Component = React.lazy(()=> import("./partners/PartnersRoute")) 
         }
         return (
             <Suspense fallback={<Loading/>}>

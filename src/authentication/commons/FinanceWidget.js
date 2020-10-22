@@ -75,7 +75,7 @@ class FinanceWidget extends React.Component{
                                                         (<span>0</span>)
                                                     :
                                                         (
-                                                            <span>{this.props.finance.finance[0].total_balance}</span>
+                                                            <span>{this.props.finance.finance[0].total_balance.toLocaleString()}</span>
                                                         )
                                                 }
                                                 </Typography>
@@ -119,7 +119,7 @@ class FinanceWidget extends React.Component{
                                                 :
                                                     (
                                                         <span>
-                                                            {`Sell balance: ${this.props.finance.finance[0].total_balance} ETB`}
+                                                            {`Sell balance: ${this.props.finance.finance[0].total_balance.toLocaleString()} ETB`}
                                                         </span>
                                                     )
                                             }/>
@@ -127,7 +127,15 @@ class FinanceWidget extends React.Component{
 
                                         <ListItem button>
                                             <ListItemText primary={
-                                                `Total card balance: ${this.props.finance.current_goal} ETB`
+                                                this.props.finance.finance.length<=0
+                                                ?
+                                                    (<span>Total cards balance : 0 ETB</span>)
+                                                :
+                                                    (
+                                                        <span>
+                                                            {`Total card balance: ${this.props.finance.finance[0].total_goal.toLocaleString()} ETB`}
+                                                        </span>
+                                                    )
                                             }/>
                                         </ListItem>
 

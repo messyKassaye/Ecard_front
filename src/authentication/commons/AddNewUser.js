@@ -106,7 +106,6 @@ class AddNewUser extends Component {
                 <ValidatorForm
                     onSubmit={this.handleSubmit}
                 >
-                    <Typography style={{color:green[500]}}>{this.props.response.message}</Typography>
                     <TextValidator
                         className={classes.text_input}
                         label={'First name'}
