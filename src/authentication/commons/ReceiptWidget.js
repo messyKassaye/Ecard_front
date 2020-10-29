@@ -52,7 +52,7 @@ class ReceiptWidget extends React.Component{
                                 Payed to
                             </TableCell>
                             <TableCell>
-                                {`${this.props.user.first_name} ${this.props.user.last_name}`}
+                                {`${this.props.user.first_name}`}
                             </TableCell>
                         </TableRow>
 

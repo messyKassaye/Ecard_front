@@ -37,7 +37,7 @@ const districtManagerMenu = [
     },
     {
         name:'Settings',
-        route:'/auth/admin/settings',
+        route:'/auth/partners/settings',
         icon: <SettingIcon/>,
     },
 ]

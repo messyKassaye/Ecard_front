@@ -60,7 +60,7 @@ class MyAgentsRetailers extends React.Component{
                                                     <Grid item md={6} xs={12} sm={12}>
                                                         <Card>
                                                             <CardHeader
-                                                            title={`${agent.user[0].first_name} ${agent.user[0].last_name}`}
+                                                            title={`${agent.user[0].first_name}`}
                                                             avatar={<Avatar>{agent.user[0].first_name.charAt(0)}</Avatar>}
                                                             subheader={agent.user[0].role[0].name}
                                                             action={
@@ -77,9 +77,7 @@ class MyAgentsRetailers extends React.Component{
                                                             />
                                                             <CardContent style={{paddingTop:0}}>
                                                             <Divider/>
-                                                            <Typography style={{marginBottom:15,marginTop:10}}>
-                                                                {`Email: ${agent.user[0].email}`}
-                                                            </Typography>
+                                                            
                                                             <Typography>
                                                                 {`Phone: ${agent.user[0].phone}`}
                                                             </Typography>

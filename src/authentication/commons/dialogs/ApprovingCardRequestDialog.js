@@ -14,7 +14,8 @@ class ApprovingCardRequestDialog extends React.Component{
                 request_id:''
             },
             sending:false,
-            sendDone:false
+            sendDone:false,
+            notSent:false
         }
     }
     
@@ -23,21 +24,26 @@ class ApprovingCardRequestDialog extends React.Component{
 
     }
 
-    senCardRequest = (paymentType)=>{
+    senCardRequest = (paymentTypeId)=>{
             this.setState({sending:true})
         const {formData} = this.state
         formData['request_id'] = this.props.cardRequest.id;
         formData['card_type_id']=this.props.cardRequest.card_type_id
         formData['status'] ='Sold';
-        formData['payment_type_id']= paymentType.id
+        formData['payment_type_id']= paymentTypeId
         this.setState(formData)
-        this.props.approveCardRequest(formData)
+        this.props.approveCardRequest(formData,this.props.cardRequest.id)
     }
 
     componentWillReceiveProps(nextProps, nextContext) {
         if(nextProps.response.status){
             this.setState({
                 sendDone:true,
+                sending:false
+            })
+        }else{
+            this.setState({
+                notSent:true
             })
         }
     }
@@ -59,71 +65,42 @@ class ApprovingCardRequestDialog extends React.Component{
     }
     render(){
         return <div>
-            {
-                this.state.sendDone
+            <div>
+             {
+                this.props.loading
                 ?
-                    (
-                        <Typography color={'primary'}>
-                           card request is send successfully.
-                        </Typography>
-                    )
-                :
-                    (
+                 
+                (
+                        <HorizontalLoading height={50}/>
+                 )
+                        :
+                (
                         <div>
-                            {
-                                    this.state.sending
-                                    ?
-                                        (
-                                                <div>
-                                                    {
-                                                        this.state.sending
-                                                            ?
-                                                                (
-                                                                    <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-                                                                    <CircularProgress color={'primary'}/>
-                                                                    <Typography>
-                                                                        Sending cards...
-                                                                    </Typography>
-                                                            </div>
-                                                                )
-                                                            :
-                                                                (
-                                                                <div>
-                                                                    {
-                                                                        this.props.response.status
-                                                                        ?
-                                                                            (<span>Sended</span>)
-                                                                        :
-                                                                            (
-                                                                                <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
-                                                                                    <Typography color={'secondary'}>
-                                                                                        {this.props.response.message}
-                                                                                    </Typography>
-                                                                                    <Button
-                                                                                    onClick={this.getCards}
-                                                                                    variant={'outlined'}
-                                                                                    color={'primary'}
-                                                                                    size={'medium'}
-                                                                                    style={{textTransform:'none',marginTop:25}}
-                                                                                    >
-                                                                                        Get cards
-                                                                                    </Button>
-                                                                                </div>
-                                                                            )
-                                                                    }
-                                                                    </div> 
-                                                                )
-                                                    }
-                                                </div>
-                                        )
-                                    :
-                                        (
-                                            <div>
-                                                {
-                                                this.props.loading
+                             {
+                                 this.state.sendDone
+                                 ?
+                                    (
+                                        <div>
+                                            <Typography color={'secondary'}>{this.props.response.message}</Typography>
+                                        </div>
+                                    )
+                                 :
+                                    (
+                                        <div>
+                                            {
+                                                this.state.sending
                                                 ?
-                                                    (<HorizontalLoading height={50}/>)
+                                                    (
+                                                        <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
+                                                        
+                                                            <CircularProgress/>
+                                                            <Typography color={'primary'}>
+                                                                Sending your cards...
+                                                            </Typography>
+                                                        </div>
+                                                    )
                                                 :
+
                                                     (
                                                         <div>
                                                             {
@@ -139,7 +116,7 @@ class ApprovingCardRequestDialog extends React.Component{
                                                                 {
                                                                     this.props.paymentTypes.map(paymentType=>(
                                                                         <Button
-                                                                        onClick={()=>this.senCardRequest(paymentType)}
+                                                                        onClick={()=>this.senCardRequest(paymentType.id)}
                                                                         variant={'outlined'}
                                                                         color={paymentType.id===1?'secondary':'primary'}
                                                                         style={{textTransform:'none'}}>
@@ -152,20 +129,39 @@ class ApprovingCardRequestDialog extends React.Component{
                                                         )
                                                     :
                                                         (
-                                                            <div>
+                                                            <div style={{display:'flex',flexDirection:'column',alignItems:'center'}}>
                                                                 <Typography>Have you checked your bank transaction statement and did this transaction ref number is found there. if it is found click yes if not click no</Typography>
+                                                           
+                                                                <div style={{display:'flex',flexDirection:'row',justifyContent:'space-between',marginTop:30}}>
+                                                                
+                                                                <Button
+                                                                color={'secondary'}
+                                                                variant={'outlined'}
+                                                                style={{textTransform:'none',marginRight:50}}>
+                                                                    No
+                                                                </Button>
+
+                                                                <Button
+                                                                onClick={()=>this.senCardRequest(3)}
+                                                                color={'primary'}
+                                                                variant={'contained'}
+                                                                style={{textTransform:'none'}}>
+                                                                    Yes
+                                                                </Button>
+                                                                </div>
                                                             </div>
                                                         )
                                                 }
-                                            </div>
-                                        )
-                                }
-                                            </div>
-                                        )
-                                }
+                                                        </div>
+                                                    )
+                                            }
+                                        </div>
+                                    )
+                             }             
                         </div>
-                    )
-            }
+                )
+             }
+            </div>
         </div>
     }
 }

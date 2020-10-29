@@ -113,7 +113,12 @@ class PartnersDashboard extends React.Component{
                             <LogoComponent variant={'h5'} margin={15} firstColor={'white'} secondColor={orange[500]}/>
                         </Typography><div className={classes.grow}/>
                         <FinanceWidget/>
+                        <IconButton
+                        color={'inherit'}
+                        component={Link} to={'/auth/partners/notifications'}
+                        >
                         <Notifications/>
+                        </IconButton>
                         <Profile/>
                     </Toolbar>
                 </AppBar>

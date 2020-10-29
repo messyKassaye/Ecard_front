@@ -4,6 +4,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { PARTNER_API_URL } from '../../../../constants/constants';
 import {verifyUser} from '../../../commons/state/action/verificationAction'
+import {updateFollows} from '../../../commons/state/action/followAction'
+
 class VerificationCard extends React.Component{
 
     constructor(props) {
@@ -52,7 +54,10 @@ class VerificationCard extends React.Component{
             this.setState({
                 verified:true,
             })
-
+        }else{
+            this.setState({
+                verified:false,
+            })
         }
     }
 
@@ -76,7 +81,7 @@ class VerificationCard extends React.Component{
             :
               <Avatar src={follow.user[0].avator}></Avatar>
         }
-        title={`${follow.user[0].first_name} ${follow.user[0].last_name}`}/>
+        title={`${follow.user[0].first_name}`}/>
         <CardContent style={{padding:5,display:'flex',flexDirection:'column'}}>
             <Divider/>
             {
@@ -101,11 +106,11 @@ class VerificationCard extends React.Component{
                                                     (
                                                         <div style={{display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                                                             {
-                                                                this.state.verified
+                                                                this.state.verified||!this.state.verification
                                                                 ?
                                                                     (
                                                                     <Typography color={'primary'} variant={'h5'}>
-                                                                        Verified
+                                                                        {this.props.response.message}
                                                                     </Typography>            
                                                                     )
                                                                 :
@@ -149,7 +154,7 @@ class VerificationCard extends React.Component{
                                                 Verify this user
                                             </Button>
                                             <Button
-                                            onClick={()=>this.updateFollow(follow.id,'canceled')}
+                                            onClick={()=>this.updateFollow(follow.id,3)}
                                             variant={'contained'}
                                             color={'secondary'}
                                             style={{textTransform:'none',marginRight:15}}>
@@ -178,4 +183,4 @@ class VerificationCard extends React.Component{
 const mapStateToProps = state=>({
     response:state.authReducer.commonReducer.verificationReducer.response
 })
-export default connect(mapStateToProps,{verifyUser})(VerificationCard)
+export default connect(mapStateToProps,{verifyUser,updateFollows})(VerificationCard)

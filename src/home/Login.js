@@ -20,7 +20,7 @@ class Login extends React.Component {
         super(props)
         this.state = {
             formData: {
-                "email": '',
+                "phone": '',
                 "password": ''
             },
             submitted: false,
@@ -61,7 +61,7 @@ class Login extends React.Component {
             })
             .catch(onerror=>{
                 if(!onerror.response){
-                    this.setState({errorMessage:'networkError'})
+                    this.setState({errorMessage:'Something is not Good. Please check your internet connection'})
                     this.setState({
                         loading: false,
                         finished: false,
@@ -70,7 +70,7 @@ class Login extends React.Component {
                 }else {
                     let code = onerror.response.status
                     if(code===403){
-                        this.setState({errorMessage:'Unauthorized user'})
+                        this.setState({errorMessage:'Incorrect email or password is used. Please try again ):'})
                     }
                     this.setState({
                         loading: false,
@@ -89,7 +89,7 @@ class Login extends React.Component {
         const {loading} = this.state;
         const {finished} = this.state
         const setLoading = !finished && loading;
-        const isEnabled = formData.email.length > 0 && formData.password.length > 0
+        const isEnabled = formData.phone.length > 0 && formData.password.length > 0
         return (
             <ValidatorForm
                  onSubmit={this.handleSubmit}
@@ -97,17 +97,18 @@ class Login extends React.Component {
                             >
                                 {
                                     <Typography component='p' className={classes.errors}>
+                                        {this.state.errorMessage}
                                     </Typography>
                                 }
                                 <TextValidator
                                     className={classes.text_input}
-                                    label={'Email'}
+                                    label={'phone'}
                                     onChange={this.handleChange}
-                                    name="email"
-                                    type='email'
-                                    value={this.state.formData.email}
-                                    validators={['required', 'isEmail']}
-                                    errorMessages={['Please enter your email', 'is not valid email']}
+                                    name="phone"
+                                    type='phone'
+                                    value={this.state.formData.phone}
+                                    validators={['required']}
+                                    errorMessages={['Please enter your email']}
                                 />
 
                                 <TextValidator

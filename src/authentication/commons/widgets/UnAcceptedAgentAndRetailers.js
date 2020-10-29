@@ -105,12 +105,12 @@ class UnAcceptedAgentAndRetailers extends React.Component{
                                                             :
                                                               <Avatar src={follow.user[0].avator}></Avatar>
                                                         }
-                                                        title={`${follow.user[0].first_name} ${follow.user[0].last_name}`}/>
+                                                        title={`${follow.user[0].first_name}`}/>
                                                         <CardContent style={{padding:5,display:'flex',flexDirection:'column'}}>
                                                             <Divider/>
                                                            <div style={{marginTop:10,display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                                                            <Button
-                                                           onClick={()=>this.remove(follow.id,'removed')}
+                                                           onClick={()=>this.remove(follow.id,3)}
                                                             variant={'outlined'}
                                                             color={'secondary'}
                                                             style={{textTransform:'none',marginRight:25}}>

@@ -2,7 +2,7 @@ import React from 'react'
 import HomeAppBar from './HomeAppBar'
 import withStyles from '@material-ui/core/styles/withStyles'
 import homeStyle from './styles/homeStyle'
-import { Card, CardContent, CardHeader } from '@material-ui/core'
+import { Card, CardContent, CardHeader, Typography } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person'
 import FooterPage from './FooterPage'
 import FormControl from "@material-ui/core/FormControl";
@@ -27,9 +27,7 @@ class SignUpPage extends React.Component{
         this.state = {
             formData: {
                 'first_name': '',
-                'last_name': '',
                 'phone': '',
-                'email': '',
                 'role_id':'',
                 'password': ''
             },
@@ -93,17 +91,22 @@ class SignUpPage extends React.Component{
                window.location.reload()
             })
             .catch(onerror=>{
-                if(!onerror.status){
-                    this.setState({errorMessage:'networkError'})
+                if(!onerror.response){
+                    this.setState({errorMessage:'Something is not Good. Please check your internet connection'})
+                    this.setState({
+                        loading: false,
+                        finished: false,
+                        submitted: false,
+                    })
                 }else {
                     let code = onerror.response.status
-                    if(code===409){
-                        this.setState({errorMessage:onerror.response.data.message})
+                    if(code===403){
+                        this.setState({errorMessage:'Incorrect email or password is used. Please try again ):'})
                     }
                     this.setState({
-                        loading:false,
-                        finished:true,
-                        submitted:false
+                        loading: false,
+                        finished: false,
+                        submitted: false,
                     })
                 }
             })
@@ -115,8 +118,8 @@ class SignUpPage extends React.Component{
          const { loading } = this.state;
          const finished = false
          const setLoading = !finished && loading;
-         const isEnabled = formData.first_name.length>0&&formData.last_name.length>0 && formData.phone.length>0&&
-             formData.email.length>0&&formData.role_id>0&&formData.password.length>0
+         const isEnabled = formData.first_name.length>0&& formData.phone.length>0&&
+               formData.role_id>0&&formData.password.length>0
         return (
             <div className={classes.root}>
                 <HomeAppBar/>
@@ -131,10 +134,13 @@ class SignUpPage extends React.Component{
                   <ValidatorForm
                                  onSubmit={this.handleSubmit}
                              >
+                                 <Typography color={'secondary'}>
+                                     {this.state.errorMessage}
+                                 </Typography>
                                  
                                  <TextValidator
                                      className={classes.text_input}
-                                     label={'First name'}
+                                     label={'Name'}
                                      onChange={this.handleChange}
                                      name="first_name"
                                      value={this.state.formData.first_name}
@@ -142,15 +148,6 @@ class SignUpPage extends React.Component{
                                      errorMessages={['Enter first name']}
                                  />
 
-                                 <TextValidator
-                                     className={classes.text_input}
-                                     label={'Last name'}
-                                     onChange={this.handleChange}
-                                     name="last_name"
-                                     value={this.state.formData.last_name}
-                                     validators={['required']}
-                                     errorMessages={['Please enter your last name']}
-                                 />
 
                                  <TextValidator
                                      className={classes.text_input}
@@ -162,15 +159,6 @@ class SignUpPage extends React.Component{
                                      errorMessages={['Please enter you phone']}
                                  />
 
-                                 <TextValidator
-                                     className={classes.text_input}
-                                     label={'Email address'}
-                                     onChange={this.handleChange}
-                                     name="email"
-                                     value={this.state.formData.email}
-                                     validators={['required','isEmail']}
-                                     errorMessages={['Enter your email address','Incorrect email address']}
-                                 />
                                  <FormControl component='fieldset'>
                                      <FormLabel component='legend'>Register me as</FormLabel>
                                      <RadioGroup

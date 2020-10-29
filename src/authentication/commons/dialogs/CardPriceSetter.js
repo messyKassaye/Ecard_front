@@ -83,7 +83,7 @@ class CardPriceSetter extends React.Component{
                  </Typography>
                             <TextValidator
                              onChange={this.handleChange}
-                             label={`Enter your your gaining percentage E.g 0.9,0.86`}
+                             label={`Enter your  gaining percentage E.g 90 ,86`}
                              name={'percentage'}
                              type={'number'}
                              style={{marginTop:-10}}

@@ -143,10 +143,10 @@ class NewCardRequests extends React.Component{
                                                                 (
                                                                     <div style={{display:'flex',flexDirection:'column'}}>
                                                                         <Typography>
-                                                                        {`Unit price: ${requests.card_type.value*this.props.cardPrice[0].percentage} ETB`}
+                                                                        {`Unit price: ${requests.card_type.value*this.props.cardPrice[0].percentage_value} ETB`}
                                                                          </Typography>
                                                                         <Typography>
-                                                                        {`Total payment: ${calculateCardPayment(requests.card_type.value,requests.amount,this.props.cardPrice[0].percentage).toLocaleString()} ETB`}
+                                                                        {`Total payment: ${calculateCardPayment(requests.card_type.value,requests.amount,this.props.cardPrice[0].percentage_value).toLocaleString()} ETB`}
                                                                          </Typography>
                                                                     </div>
                                                                 )

@@ -1,6 +1,6 @@
-import {APPROVE_CARD_REQUEST} from '../commonConstants'
+import {SEND_FRIEND_REQUEST} from '../PartnersConstants'
 
-const initialState={
+const initialState = {
     response:{
         status:false,
         message:''
@@ -9,8 +9,8 @@ const initialState={
 
 export default function(state=initialState,action){
     switch(action.type){
-        case APPROVE_CARD_REQUEST:
-            return {
+        case SEND_FRIEND_REQUEST:
+            return{
                 ...state,
                 response:action.payload
             }

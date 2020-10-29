@@ -66,7 +66,7 @@ class DrawerProfile extends React.Component{
                              :<Avatar className={classes.avatarImage} src={`${this.props.user.attribute.avator}`}></Avatar>
                      }
                      {
-                         <span>{`${this.props.user.attribute.first_name} ${this.props.user.attribute.last_name}`}</span>
+                         <span>{`${this.props.user.attribute.first_name}`}</span>
                      }
                      <div style={{marginLeft:25,margin:0}}>
                          <IconButton
