@@ -20,6 +20,7 @@ import roles from './data/roles'
 import { API_AUTH_URL } from '../constants/constants'
 import axios from 'axios'
 import {set,setRole} from '../TokenService'
+import DownloadApp from './DownloadApp'
 class SignUpPage extends React.Component{
 
     constructor(props){
@@ -33,6 +34,8 @@ class SignUpPage extends React.Component{
             },
             submitted:false,
             loading:false,
+            partner:true,
+            signUpUser:''
         }
 
     }
@@ -85,10 +88,18 @@ class SignUpPage extends React.Component{
         })
             .then((res)=>res.data)
             .then((response)=> {
+               if(response.role.id===2){
                set(response.token)
                setRole(JSON.stringify(response.role))
                this.props.history.push('/auth')
                window.location.reload()
+               }else{
+                   this.setState({
+                       partner:false,
+                       signUpUser:response.role
+                   })
+               }
+               
             })
             .catch(onerror=>{
                 if(!onerror.response){
@@ -124,93 +135,103 @@ class SignUpPage extends React.Component{
             <div className={classes.root}>
                 <HomeAppBar/>
                 <div className={classes.container}>
-                <Card className={classes.card}>
-                    <CardHeader
-                     style={{backgroundColor:'#6610f2',color:'white'}}
-                     title={'Sign up now'}
-                     avatar={<PersonIcon/>}
-                    />
-                  <CardContent>
-                  <ValidatorForm
-                                 onSubmit={this.handleSubmit}
-                             >
-                                 <Typography color={'secondary'}>
-                                     {this.state.errorMessage}
-                                 </Typography>
-                                 
-                                 <TextValidator
-                                     className={classes.text_input}
-                                     label={'Name'}
-                                     onChange={this.handleChange}
-                                     name="first_name"
-                                     value={this.state.formData.first_name}
-                                     validators={['required']}
-                                     errorMessages={['Enter first name']}
-                                 />
+                {
+                    this.state.partner
+                    ?
+                        (
+                            <Card className={classes.card}>
+                                    <CardHeader
+                                    style={{backgroundColor:'#6610f2',color:'white'}}
+                                    title={'Sign up now'}
+                                    avatar={<PersonIcon/>}
+                                    />
+                                <CardContent>
+                                <ValidatorForm
+                                                onSubmit={this.handleSubmit}
+                                            >
+                                                <Typography color={'secondary'}>
+                                                    {this.state.errorMessage}
+                                                </Typography>
+                                                
+                                                <TextValidator
+                                                    className={classes.text_input}
+                                                    label={'Name'}
+                                                    onChange={this.handleChange}
+                                                    name="first_name"
+                                                    value={this.state.formData.first_name}
+                                                    validators={['required']}
+                                                    errorMessages={['Enter first name']}
+                                                />
 
 
-                                 <TextValidator
-                                     className={classes.text_input}
-                                     label={'phone'}
-                                     onChange={this.handleChange}
-                                     name="phone"
-                                     value={this.state.formData.phone}
-                                     validators={['required']}
-                                     errorMessages={['Please enter you phone']}
-                                 />
+                                                <TextValidator
+                                                    className={classes.text_input}
+                                                    label={'phone'}
+                                                    onChange={this.handleChange}
+                                                    name="phone"
+                                                    value={this.state.formData.phone}
+                                                    validators={['required']}
+                                                    errorMessages={['Please enter you phone']}
+                                                />
 
-                                 <FormControl component='fieldset'>
-                                     <FormLabel component='legend'>Register me as</FormLabel>
-                                     <RadioGroup
-                                         className={classes.register_me_as}
-                                         aria-label="gender"
-                                         name="role_id"
-                                         onChange={this.handleRadionButton}>
-                                         {
-                                             roles.map(item=>(
-                                                <FormControlLabel
-                                                    key={item.name}
-                                                    value={item.name}
-                                                    control={<Radio />}
-                                                    label={item.name} />
-                                            ))
-                                         }
-                                     </RadioGroup>
-                                 </FormControl>
-                                 <TextValidator
-                                     className={classes.text_input}
-                                     label={'Password'}
-                                     onChange={this.handleChange}
-                                     name="password"
-                                     type='password'
-                                     value={this.state.formData.password}
-                                     validators={['required']}
-                                     errorMessages={['Enter your password']}
-                                 />
-                                
-                                     <div className={classes.submit_division}>
-                                         <LoadingButton
-                                             className={classes.signup_button}
-                                             color="primary"
-                                             variant="contained"
-                                             type="submit"
-                                             loading={setLoading}
-                                             done={finished}
-                                             text={'Sign up'}
-                                             disabled={!isEnabled ||this.state.submitted}
-                                         >
-                                             {
-                                                'Sign up'
-                                             }
-                                         </LoadingButton>
-                                         <div className={classes.registered}>
-                                             <span style={{marginRight:10}}>Already sign up</span>
-                                             <Link to='/login'>Login</Link>
-                                         </div>
-                                     </div>
-                             </ValidatorForm>
-                 </CardContent>
-                </Card>
+                                                <FormControl component='fieldset'>
+                                                    <FormLabel component='legend'>Register me as</FormLabel>
+                                                    <RadioGroup
+                                                        className={classes.register_me_as}
+                                                        aria-label="gender"
+                                                        name="role_id"
+                                                        onChange={this.handleRadionButton}>
+                                                        {
+                                                            roles.map(item=>(
+                                                                <FormControlLabel
+                                                                    key={item.name}
+                                                                    value={item.name}
+                                                                    control={<Radio />}
+                                                                    label={item.name} />
+                                                            ))
+                                                        }
+                                                    </RadioGroup>
+                                                </FormControl>
+                                                <TextValidator
+                                                    className={classes.text_input}
+                                                    label={'Password'}
+                                                    onChange={this.handleChange}
+                                                    name="password"
+                                                    type='password'
+                                                    value={this.state.formData.password}
+                                                    validators={['required']}
+                                                    errorMessages={['Enter your password']}
+                                                />
+                                                
+                                                    <div className={classes.submit_division}>
+                                                        <LoadingButton
+                                                            className={classes.signup_button}
+                                                            color="primary"
+                                                            variant="contained"
+                                                            type="submit"
+                                                            loading={setLoading}
+                                                            done={finished}
+                                                            text={'Sign up'}
+                                                            disabled={!isEnabled ||this.state.submitted}
+                                                        >
+                                                            {
+                                                                'Sign up'
+                                                            }
+                                                        </LoadingButton>
+                                                        <div className={classes.registered}>
+                                                            <span style={{marginRight:10}}>Already sign up</span>
+                                                            <Link to='/login'>Login</Link>
+                                                        </div>
+                                                    </div>
+                                            </ValidatorForm>
+                                </CardContent>
+                                </Card>
+                        )
+                    :
+                        (
+                            <DownloadApp role={this.state.signUpUser}/>
+                        )
+                }
                 </div>
                 <FooterPage/>
             </div>

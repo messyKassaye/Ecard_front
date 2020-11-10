@@ -195,6 +195,17 @@ const  homeStyle = theme=>({
         fontSize: 16,
         direction:'row',
     },
+    downloadApp:{
+        width:600,
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        padding:10,
+        [theme.breakpoints.down('xs')]:{
+            width:500,
+            padding:20
+        }
+    }
     
 
 })
