@@ -15,7 +15,45 @@ const  homeStyle = theme=>({
         flexDirection:'column',
         alignItems:'center',
         marginTop:100,
-        flex:1
+        flex:1,
+    },
+    container2:{
+        display:'flex',
+        flexDirection:'row',
+        justifyContent:'space-bewteen',
+        [theme.breakpoints.down('xs')]:{
+            display:'flex',
+            flexDirection:'column'
+        }
+    },
+    appBar:{
+        backgroundColor:'transparent',
+        [theme.breakpoints.down('xs')]:{
+            backgroundColor:'white'
+        }
+    },
+    toolBar:{
+        backgroundColor:'transparent',
+        [theme.breakpoints.down('xs')]:{
+            backgroundColor:'white'
+        }
+    },
+    innerContainer:{
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        marginLeft:150,
+        [theme.breakpoints.down('xs')]:{
+            marginLeft:0,
+            alignItems:'flex-start'
+        }
+    },
+    lists:{
+        marginBottom:20,
+        marginLeft:100,
+        [theme.breakpoints.down('xs')]:{
+            marginLeft:10
+        }
     },
     card:{
         width:500,
@@ -26,13 +64,17 @@ const  homeStyle = theme=>({
     },
     grow:{
         display:'flex',
-        flexGrow:'1'
+        flexGrow:'1',
+        [theme.breakpoints.down('xs')]:{
+            display:'none'
+        }
     },
     button:{
         textTransform:'none',
         marginRight:250,
         [theme.breakpoints.down('xs')]:{
-            marginRight:10
+            marginRight:0,
+            marginLeft:200
         }
     },
     footer:{
@@ -71,14 +113,43 @@ const  homeStyle = theme=>({
         [theme.breakpoints.down('xs')]:{
             display:'flex',
             flexDirection:'column',
+            marginBottom:100
            
+        }
+    },
+    title1:{
+        fontSize:'2.5em',
+        fontWeight:'bold',
+        [theme.breakpoints.down('xs')]:{
+            fontSize:'1.2em'
         }
     },
     headerContainerTwo:{
         width:650,
         display:'flex',
         flexDirection:'column',
-        justifyContent:'flex-start'
+        justifyContent:'flex-start',
+        [theme.breakpoints.down('xs')]:{
+            width:'auto',
+            display:'flex',
+            flexDirection:'column',
+            alignItems:'center'
+        }
+    },
+    signUpBtn:{
+        marginTop:25,
+        [theme.breakpoints.down('xs')]:{
+            width:'100%'
+        }
+    },
+    firstImage:{
+        width:'58%',
+        height:500,
+        [theme.breakpoints.down('xs')]:{
+            marginTop:25,
+            width:'100%',
+            height:300
+        }
     },
     form:{
         marginTop:-80,

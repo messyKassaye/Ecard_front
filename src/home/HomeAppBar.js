@@ -12,8 +12,8 @@ class HomeAppBar extends React.Component{
     render(){
         const {classes} = this.props
         return (
-            <AppBar style={{backgroundColor:'transparent'}} elevation={0}>
-                    <Toolbar style={{backgroundColor:'transparent'}}>
+            <AppBar className={classes.appBar} elevation={0} position={'fixed'}>
+                    <Toolbar className={classes.toolBar}>
                     <Typography component={Link} to={'/'} style={{cursor:'pointer',textDecoration:'none'}}>
                         <LogoComponent variant={'h5'} margin={15} firstColor={'#6610f2'} secondColor={orange[500]}/>
                     </Typography>

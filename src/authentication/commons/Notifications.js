@@ -6,6 +6,16 @@ import NotificationIcon from '@material-ui/icons/Notifications'
  import {connect} from "react-redux";
  import Skeleton from "@material-ui/lab/Skeleton";
  import {Link} from "react-router-dom";
+ import {me} from '../state/actions/usersActions'
+import { grey } from "@material-ui/core/colors";
+ const StyledBadge = withStyles((theme) => ({
+    badge: {
+      right: -1,
+      top:2,
+      border: `2px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+    },
+  }))(Badge);
 class Notifications extends React.Component{
 
     constructor(props) {
@@ -19,27 +29,41 @@ class Notifications extends React.Component{
         })
     }
 
+    componentDidMount(){
+        this.props.me()
+    }
+
     render() {
-        const StyledBadge1 = withStyles(theme => ({
-            badge: {
-                right: -3,
-                border: `2px solid ${theme.palette.background.paper}`,
-                padding: '0 4px',
-            },
-        }))(Badge);
+        
         return (
             <div>
-                <IconButton
-                     color='inherit'
-                            >
-                              <NotificationIcon/>
-                            </IconButton>
-
+               {
+                   this.props.loading
+                   ?
+                    (
+                        <Skeleton
+                         width={100}
+                         height={20}
+                         style={{backgroundColor:grey[500]}}/>
+                    )
+                   :
+                    (
+                        <IconButton
+                            color='inherit'>
+                            <StyledBadge badgeContent={this.props.user.relations.notification.length} color="secondary">
+                                <NotificationIcon/>
+                            </StyledBadge>
+                        </IconButton>
+                    )
+               } 
             </div>
         );
     }
 
 }
 
-
-export default Notifications
+const mapStateToProps = state=>({
+    user: state.userData.user,
+    loading:state.userData.loading
+ })
+export default connect(mapStateToProps,{me})(Notifications)

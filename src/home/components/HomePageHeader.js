@@ -15,32 +15,32 @@ class HomePageHeader extends React.Component{
             <Container maxWidth={'lg'} style={{dispplay:'flex',flexDirection:'column',alignItems:'space-between'}}>
                 <div className={classes.headerContainer}>
                     <div className={classes.headerContainerTwo}>
-                        <Typography variant={'h4'} style={{fontWeight:'bold'}}>Ecard is a card distribution partner of Ethio telecoms</Typography>
+                        <Typography className={classes.title1} >Ecard is a card distribution partner of Ethio telecoms</Typography>
                         <Button
                         component={Link}
                         to={'/signup'}
                         color={'primary'}
                         variant={'contained'}
-                        style={{marginTop:25}}
+                        className={classes.signUpBtn}
                         size={'big'}>Sign up</Button>
                     </div>
 
                     <div style={{display:'flex',flexDirection:'row',justifyContent:'center'}}>
-                        <img width={'58%'} height={500} src={slider1}/>
+                        <img className={classes.firstImage} src={slider1}/>
                     </div>
                 </div>
                 
 
                 <div>
-                    <div style={{display:'flex',flexDirection:'row',justifyContent:'space-bewteen'}}>
-                        <img width={'auto'} height={250} src={slider2}/>
-                        <div style={{display:'flex',
-                        flexDirection:'column',
-                        alignItems:'center',
-                        marginLeft:150}}>
+                    <div className={classes.container2}>
+                        <img className={classes.firstImage} src={slider2}/>
+                        <div className={classes.innerContainer}>
+                            <Typography variant={'h4'} color={'primary'} style={{marginBottom:15}}>
+                                Sell mobile cards to you clients
+                            </Typography>
                         {
                             lists.map(list=>(
-                                <ListItem key={list.id} role={undefined} dense button style={{marginBottom:20,marginLeft:100}}>
+                                <ListItem key={list.id} role={undefined} dense button className={classes.lists}>
                                 <ListItemIcon>
                                 <CheckBox
                                     color={'primary'}
