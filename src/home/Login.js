@@ -56,8 +56,6 @@ class Login extends React.Component {
                 set(response.token)
                 setRole(JSON.stringify(response.role))
                 this.props.history.push('/auth')
-                window.location.reload()
-
             })
             .catch(onerror=>{
                 if(!onerror.response){

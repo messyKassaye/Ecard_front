@@ -17,6 +17,8 @@ class Authenticated extends React.Component{
             Component = React.lazy(()=>import("./admin/AdminRoutes"))
         }else  if(roleId===2){
             Component = React.lazy(()=> import("./partners/PartnersRoute")) 
+        }else if(roleId==3){
+            Component = React.lazy(()=> import("./agents/AgentsRoute")) 
         }
         return (
             <Suspense fallback={<Loading/>}>

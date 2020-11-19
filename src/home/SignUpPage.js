@@ -88,17 +88,9 @@ class SignUpPage extends React.Component{
         })
             .then((res)=>res.data)
             .then((response)=> {
-               if(response.role.id===2){
-               set(response.token)
-               setRole(JSON.stringify(response.role))
-               this.props.history.push('/auth')
-               window.location.reload()
-               }else{
-                   this.setState({
-                       partner:false,
-                       signUpUser:response.role
-                   })
-               }
+                set(response.token)
+                setRole(JSON.stringify(response.role))
+                this.props.history.push('/auth')
                
             })
             .catch(onerror=>{
